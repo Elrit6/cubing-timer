@@ -1,0 +1,70 @@
+:root {
+	--bg-color-1: rgb(15, 15, 15);
+	--bg-color-2: rgb(20, 20, 20);
+	--font-family: "Verdana";
+	--font-size-1: 6rem;
+	--font-size-2: 3rem;
+	--font-size-3: 2rem;	
+	color-scheme: dark; 
+}
+
+
+h1, h2, h3, input[type="text"] {
+	font-family: var(--font-family); 
+}
+h1, input[type="text"] {
+	font-size: var(--font-size-1); 
+}
+h2 {	
+	font-size: var(--font-size-2); 
+}
+h3 {
+	font-size: var(--font-size-3); 
+}
+
+
+.grid, .header {
+	background-color: var(--bg-color-2); 
+}
+.grid {
+	display: grid;
+	grid-template-columns: 240px 1fr;
+	grid-template-rows: 8rem 1fr;
+	height: 100vh; 
+}
+
+
+.header {
+	grid-column: span 2; 
+	text-align: center; 
+}
+
+
+.solves {
+}
+.solves-list {
+	height: 50vh;
+	overflow: auto;
+}
+
+
+.main { 
+	background-color: var(--bg-color-1); 
+	display: grid; 
+}
+.timer {
+    display: grid;
+    place-items: center; 
+	line-height: 100%; 
+}
+.timer-input {
+	caret-color: transparent;
+	text-align: center;
+	width: 30rem; 
+}
+
+
+
+
+
+

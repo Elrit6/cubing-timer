@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title> Timer </title>
+	<link rel="stylesheet" href="main.css"> 
+</head>
+
+<body>
+	<div class="grid">
+
+		<section class="header">
+			<div class="scramble">
+				<h2 class="scramble-text" id="scramble-text"> R U R' U' L U L' U' </h2>
+			</div>
+		</section>
+
+		<section class="sidebar">
+			<div class="stats">
+				<div class="pb">
+					<h3> PB: </h3>
+					<h3 class="pb-text" id="pb-text"></h3>
+				</div>
+			</div>
+			<div class="solves">
+				<h3>
+					<ol class="solves-list" id="solves-list">
+					</ol>
+				</h3>
+			</div>
+			<div class="settings">
+				<button class="clear-button" id="clear-button"> clear </button>
+				<button class="export-button" id="export-button"> export </button>
+				<select class="font-select" id="font-select">
+				    <option value="arial"> Arial </option>
+				    <option value="comic sans ms"> Comic Sans </option>
+				    <option value="courier new"> Courier New </option>
+				    <option value="georgia"> Georgia </option>
+				    <option value="lato"> Lato </option>
+				    <option value="montserrat"> Montserrat </option>
+				    <option value="roboto"> Roboto </option>
+				    <option value="tahoma"> Tahoma </option>
+				    <option value="Impact"> Impact </option>
+				    <option value="verdana"> Verdana </option>
+				</select>
+			</div>
+		</section>
+
+		<section class="main">
+			<div class="timer">
+				<h1 class="timer-input" id="timer-input"> 0.00 </h1>
+			</div>
+		</section>
+
+	</div>
+
+	<script src="main.js"></script> 
+</body>
+
+</html>
