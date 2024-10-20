@@ -1,6 +1,7 @@
 :root {
 	--bg-color-1: rgb(15, 15, 15);
 	--bg-color-2: rgb(20, 20, 20);
+	--font-color: white;
 	--font-family: "Verdana";
 	--font-size-1: 6rem;
 	--font-size-2: 3rem;
@@ -8,8 +9,12 @@
 	color-scheme: dark; 
 }
 
+body {
+	margin: 0px;
+}
 
-h1, h2, h3, input[type="text"] {
+.timer-input, button, h1, h2, h3, input[type="text"], label, select {
+	color: var(--font-color);
 	font-family: var(--font-family); 
 }
 h1, input[type="text"] {

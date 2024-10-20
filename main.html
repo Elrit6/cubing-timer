@@ -18,6 +18,10 @@
 		</section>
 
 		<section class="sidebar">
+			<div class="solves-settings">
+				<button class="export-button" id="export-button"> export </button>
+				<button class="clear-button" id="clear-button"> clear </button>
+			</div>
 			<div class="stats">
 				<div class="pb">
 					<h3> PB: </h3>
@@ -31,8 +35,6 @@
 				</h3>
 			</div>
 			<div class="settings">
-				<button class="clear-button" id="clear-button"> clear </button>
-				<button class="export-button" id="export-button"> export </button>
 				<select class="font-select" id="font-select">
 				    <option value="arial"> Arial </option>
 				    <option value="comic sans ms"> Comic Sans </option>
@@ -45,6 +47,14 @@
 				    <option value="Impact"> Impact </option>
 				    <option value="verdana"> Verdana </option>
 				</select>
+				<label> font </label><br>	
+				<input class="font-color" id="font-color" type="color">
+				<label> text color </label><br>				
+				<input class="bg-color-1" id="bg-color-1" type="color">
+				<label> background color 1 </label><br>				
+				<input class="bg-color-2" id="bg-color-2" type="color">
+				<label> background color 2 </label>	
+				<button class="default-settings" id="default-settings"> default </button> 	
 			</div>
 		</section>
 
