@@ -174,7 +174,7 @@ class Timer {
 	handleInput() {
 		window.addEventListener("keyup", (event) => {
 			if (event.code === "Space") {
-				this.element.style.color = "white";	
+				this.element.style.color = settings.json.fontColor;	
 				if (!this.pressed && !this.running) {
 					this.start();
 				} else {
