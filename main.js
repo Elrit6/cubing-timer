@@ -1,3 +1,4 @@
+///////////////////////////////////
 class Scramble {
 	constructor() {
 		this.moves = ['U', 'F', 'R', 'B', 'L', 'D'];
