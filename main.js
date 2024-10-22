@@ -1,4 +1,3 @@
-///////////////////////////////////
 class Scramble {
 	constructor() {
 		this.moves = ['U', 'F', 'R', 'B', 'L', 'D'];
@@ -140,26 +139,40 @@ class Solves {
 
 class Stats {
 	constructor() {
-		this.element = document.getElementById("pb-text");
+		this.pbElement = document.getElementById("pb-text");
+		this.avgElement = document.getElementById("avg-text");
 		this.load();
 	}
 
 	load() {
-		this.json = localStorage.getItem("stats");
-		console.log("before: " + this.json);		
+		this.json = localStorage.getItem("stats");		
 		this.json = this.json ? JSON.parse(this.json) : {};	
-		console.log("after: " + this.json);	
-		this.element.innerHTML = this.json.pb === undefined ? "-" : this.json.pb;
+		this.pbElement.innerHTML = this.json.pb === undefined ? "-" : this.json.pb;
+		this.updateAvg();
+	}
+
+	updatePb(time) {
+		if (this.json.pb == undefined || time < this.json.pb || !this.json.pb) {
+			this.json.pb = time;
+			this.pbElement.innerHTML = this.json.pb;	
+			localStorage.setItem("stats", JSON.stringify(this.json));	
+		}			
+	}
+
+	updateAvg(avgLength) {
+		let avg = solves.json.map(item => item.time);
+		if (avg.length > 0) {
+			this.avgElement.innerHTML = (Math.floor(avg.reduce((accumulator, currentValue) => accumulator + currentValue, 0) / avg.length * 100) / 100).toFixed(2);
+		} else {
+			this.avgElement.innerHTML = "-";
+		}
 	}
 
 	update(time) {
-		if (this.json.pb == undefined || time < this.json.pb || !this.json.pb) {
-			this.json.pb = time;
-			this.element.innerHTML = this.json.pb;	
-			localStorage.setItem("stats", JSON.stringify(this.json));	
-		}	
-		console.log(localStorage.getItem("stats"));
+		this.updatePb(time);
+		this.updateAvg();
 	}
+
 }
 
 
@@ -197,16 +210,15 @@ class Timer {
 	start() {
 		this.startTime = Date.now();
 		this.running = true;
-		this.interval = setInterval(() => this.updateTime(), 1); 
+		this.interval = setInterval(() => this.update(), 1); 
 	}
 
-	updateTime() {
+	update() {
 		this.element.innerHTML = ((Date.now() - this.startTime) / 1000).toFixed(2);
 	}
 
 	stop() {
-		this.solveTime = ((Date.now() - this.startTime) / 1000);
-		this.solveTime = Math.floor(this.solveTime * 100) / 100;
+		this.solveTime = (Math.floor(((Date.now() - this.startTime) / 1000) * 100) / 100);
 		this.pressed = true;
 		this.running = false;
 		this.element.innerHTML = this.solveTime;

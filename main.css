@@ -16,6 +16,7 @@ body {
 .timer-input, button, h1, h2, h3, input[type="text"], label, select {
 	color: var(--font-color);
 	font-family: var(--font-family); 
+	font-weight: normal;
 }
 h1, input[type="text"] {
 	font-size: var(--font-size-1); 
@@ -28,10 +29,8 @@ h3 {
 }
 
 
-.grid, .header {
-	background-color: var(--bg-color-2); 
-}
 .grid {
+	background-color: var(--bg-color-2); 
 	display: grid;
 	grid-template-columns: 240px 1fr;
 	grid-template-rows: 8rem 1fr;
@@ -44,7 +43,14 @@ h3 {
 	text-align: center; 
 }
 
-
+.stat-name, .stat-value {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+.stat-name {
+	font-weight: bold;
+}
 .solves {
 }
 .solves-list {
