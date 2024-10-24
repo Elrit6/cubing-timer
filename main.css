@@ -5,7 +5,7 @@
 	--font-family: "Verdana";
 	--font-size-1: 6rem;
 	--font-size-2: 3rem;
-	--font-size-3: 2rem;	
+	--font-size-3: 1.5rem;	
 	color-scheme: dark; 
 }
 
@@ -58,7 +58,7 @@ h3 {
 	overflow: auto;
 }
 .solves-list li {
-	margin-left: 3rem;
+	margin-left: 2rem;
 }
 
 
@@ -71,11 +71,14 @@ h3 {
     place-items: center; 
 	line-height: 100%; 
 }
-.timer-input {
-	caret-color: transparent;
+.timer-input, .time-diff {
 	text-align: center;
+	caret-color: transparent;
+}
+.timer-input {
 	width: 30rem; 
 }
+
 
 
 

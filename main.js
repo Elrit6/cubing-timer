@@ -139,38 +139,63 @@ class Solves {
 
 class Stats {
 	constructor() {
-		this.pbElement = document.getElementById("pb-text");
+		this.singlePbElement = document.getElementById("single-pb-text");
+		this.avgPbElement = document.getElementById("avg-pb-text");
 		this.avgElement = document.getElementById("avg-text");
+		this.solvesCountElement = document.getElementById("solves-count-text");
 		this.load();
 	}
 
 	load() {
 		this.json = localStorage.getItem("stats");		
 		this.json = this.json ? JSON.parse(this.json) : {};	
-		this.pbElement.innerHTML = this.json.pb === undefined ? "-" : this.json.pb;
+		this.singlePbElement.innerHTML = this.json.pb === undefined ? "-" : this.json.pb;
+		//this.json.avgPb = this.json.avgPb === undefined ? 9999 : this.json.avgPb;
+		//this.avgPbElement.innerHTML = this.json.avgPb;
+		console.log(this.json);
 		this.updateAvg();
 	}
 
-	updatePb(time) {
+	updateSinglePb(time) {
 		if (this.json.pb == undefined || time < this.json.pb || !this.json.pb) {
 			this.json.pb = time;
-			this.pbElement.innerHTML = this.json.pb;	
+			this.singlePbElement.innerHTML = this.json.pb;	
 			localStorage.setItem("stats", JSON.stringify(this.json));	
 		}			
 	}
 
 	updateAvg(avgLength) {
 		let avg = solves.json.map(item => item.time);
+		this.solvesCountElement.innerHTML = avg.length;
 		if (avg.length > 0) {
-			this.avgElement.innerHTML = (Math.floor(avg.reduce((accumulator, currentValue) => accumulator + currentValue, 0) / avg.length * 100) / 100).toFixed(2);
+			avg = Math.floor(avg.reduce((accumulator, currentValue) => accumulator + currentValue, 0) / avg.length * 100) / 100;
+			this.avgElement.innerHTML = avg.toFixed(2);
+			this.avgPbElement.innerHTML = this.json.avgPb;
+			if (avg < this.json.avgPb || this.json.avgPb == undefined) {
+				this.json.avgPb = avg;
+				this.avgPbElement.innerHTML = this.json.avgPb;
+			}
 		} else {
 			this.avgElement.innerHTML = "-";
+			this.avgPbElement.innerHTML = "-";
 		}
 	}
 
 	update(time) {
-		this.updatePb(time);
+		this.updateSinglePb(time);
 		this.updateAvg();
+		let timeDiffHtml = (Math.floor((time - this.lastTime) * 100) / 100).toFixed(2);	
+		timeDiffHtml = timeDiffHtml > 0 ? `+${timeDiffHtml}` : timeDiffHtml.toString();
+		timer.timeDiffElement.innerHTML = timeDiffHtml;			
+		if (time < this.lastTime) {
+			timer.timeDiffElement.style.color = "green";
+		} else if (time > this.lastTime) {
+			timer.timeDiffElement.style.color = "red";
+		} else {
+			this.lastTime = time;
+			timer.timeDiffElement.innerHTML = "-";	
+		}
+		this.lastTime = time;	
 	}
 
 }
@@ -179,7 +204,8 @@ class Stats {
 class Timer {
 	constructor() {
 		this.decimals = 2;		
-		this.element = document.getElementById("timer-input");
+		this.timerElement = document.getElementById("timer-input");
+		this.timeDiffElement = document.getElementById("time-diff");
 		this.pressed = false;
 		this.running = false;
 		this.handleInput();
@@ -188,7 +214,7 @@ class Timer {
 	handleInput() {
 		window.addEventListener("keyup", (event) => {
 			if (event.code === "Space") {
-				this.element.style.color = settings.json.fontColor;	
+				this.timerElement.style.color = settings.json.fontColor;	
 				if (!this.pressed && !this.running) {
 					this.start();
 				} else {
@@ -202,7 +228,7 @@ class Timer {
 				if (this.running) {
 					this.stop();
 				}
-				this.element.style.color = "green";	
+				this.timerElement.style.color = "green";	
 			}
 		});		
 	}
@@ -214,14 +240,14 @@ class Timer {
 	}
 
 	update() {
-		this.element.innerHTML = ((Date.now() - this.startTime) / 1000).toFixed(2);
+		this.timerElement.innerHTML = ((Date.now() - this.startTime) / 1000).toFixed(2);
 	}
 
 	stop() {
 		this.solveTime = (Math.floor(((Date.now() - this.startTime) / 1000) * 100) / 100);
 		this.pressed = true;
 		this.running = false;
-		this.element.innerHTML = this.solveTime;
+		this.timerElement.innerHTML = this.solveTime;
 		solves.add(new Solve(this.solveTime, scramble.element.innerHTML, main.getDate(new Date())));		
 		scramble.element.innerHTML = scramble.generate();
 		clearInterval(this.interval);		

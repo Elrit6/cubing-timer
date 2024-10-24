@@ -24,13 +24,21 @@
 			</div>
 			<div class="stats">
 				<div class="stat">
-					<h3 class="stat-name"> best: </h3>
-					<h3 class="stat-value" id="pb-text"></h3>
+					<h3 class="stat-name"> solves: </h3>
+					<h3 class="stat-value" id="solves-count-text"></h3>
+				</div>				
+				<div class="stat">
+					<h3 class="stat-name"> pb: </h3>
+					<h3 class="stat-value" id="single-pb-text"></h3>
 				</div>
 				<div class="stat">
 					<h3 class="stat-name"> avg: </h3>
 					<h3 class="stat-value" id="avg-text"></h3>
-				</div>			
+				</div>						
+				<div class="stat">
+					<h3 class="stat-name"> avg pb: </h3>
+					<h3 class="stat-value" id="avg-pb-text"></h3>					
+				</div>	
 			</div>
 			<div class="solves">
 				<h3>
@@ -64,7 +72,10 @@
 
 		<section class="main">
 			<div class="timer">
-				<h1 class="timer-input" id="timer-input"> 0.00 </h1>
+				<div>
+					<h1 class="timer-input" id="timer-input"> 0.00 </h1>
+					<h2 class="time-diff" id="time-diff"> 0.00 </h2>
+				</div>
 			</div>
 		</section>
 
